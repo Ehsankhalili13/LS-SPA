@@ -4,35 +4,52 @@ export default function useActiveSection() {
     const [activeSection, setActiveSection] = useState('home')
 
     useEffect(() => {
-        const sections = document.querySelectorAll('main > [id]')
+        const sections = Array.from(
+            document.querySelectorAll('main > [id]')
+        )
 
         if (!sections.length) {
-            console.warn('No sections with IDs found inside main')
+            console.warn('useActiveSection: no direct children with IDs found inside <main>.')
             return
         }
 
-        const observer = new IntersectionObserver(
-            entries => {
-                const visibleSections = entries
-                    .filter(entry => entry.isIntersecting)
-                    .sort(
-                        (a, b) =>
-                            b.intersectionRatio - a.intersectionRatio
-                    )
+        let ticking = false
 
-                if (visibleSections.length > 0) {
-                    setActiveSection(visibleSections[0].target.id)
+        const updateActiveSection = () => {
+            const marker = window.innerHeight * 0.35
+            let currentSection = sections[0].id
+
+            for (const section of sections) {
+                if (section.getBoundingClientRect().top <= marker) {
+                    currentSection = section.id
+                } else {
+                    break
                 }
-            },
-            {
-                rootMargin: '-20% 0px -65% 0px',
-                threshold: 0,
             }
-        )
 
-        sections.forEach(section => observer.observe(section))
+            setActiveSection(previous =>
+                previous === currentSection ? previous : currentSection
+            )
 
-        return () => observer.disconnect()
+            ticking = false
+        }
+
+        const handleScroll = () => {
+            if (!ticking) {
+                ticking = true
+                window.requestAnimationFrame(updateActiveSection)
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true })
+        window.addEventListener('resize', handleScroll)
+
+        updateActiveSection()
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+            window.removeEventListener('resize', handleScroll)
+        }
     }, [])
 
     return activeSection
