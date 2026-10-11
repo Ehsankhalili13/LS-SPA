@@ -1,0 +1,127 @@
+.teachers__header {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.teachers__header .section-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.teachers__track-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 20px 0 40px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-soft) transparent;
+}
+
+.teachers__track-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.teachers__track-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.teachers__track-wrapper::-webkit-scrollbar-thumb {
+    background: var(--primary-soft);
+    border-radius: 999px;
+}
+
+.teachers__track {
+    display: flex;
+    gap: 22px;
+    padding: 10px 24px;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.teacher-card {
+    width: 280px;
+    flex-shrink: 0;
+    padding: 28px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal) !important;
+}
+
+.teacher-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
+.teacher-card:nth-child(odd):hover {
+    box-shadow: var(--shadow-lg), 0 0 0 1px var(--primary-soft);
+}
+
+.teacher-card:nth-child(even):hover {
+    box-shadow: var(--shadow-lg), 0 0 0 1px var(--accent-soft);
+}
+
+.teacher-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 18px;
+    background: var(--primary-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid transparent;
+}
+
+.teacher-card:nth-child(odd) .teacher-avatar {
+    border-color: var(--primary-soft);
+    background: linear-gradient(135deg, var(--primary-soft), rgba(0, 136, 255, 0.05));
+}
+
+.teacher-card:nth-child(even) .teacher-avatar {
+    border-color: var(--accent-soft);
+    background: linear-gradient(135deg, var(--accent-soft), rgba(255, 107, 26, 0.05));
+}
+
+.teacher-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.teacher-card:nth-child(even) .avatar-placeholder {
+    color: var(--accent);
+}
+
+.teacher-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.teacher-role {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 14px;
+    display: block;
+}
+
+.teacher-card:nth-child(even) .teacher-role {
+    color: var(--accent);
+}
+
+.teacher-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
