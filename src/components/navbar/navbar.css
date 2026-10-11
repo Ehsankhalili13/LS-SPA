@@ -162,3 +162,9 @@ nav {
         font-size: 1.35rem;
     }
 }
+
+/* Active navigation link */
+.nav__links.active {
+    color: var(--primary);
+    background-color: var(--primary-soft);
+}
